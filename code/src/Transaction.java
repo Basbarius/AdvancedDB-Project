@@ -10,7 +10,7 @@ public class Transaction {
     BufferedReader in = null;
 
     static final String URL = "jdbc:mysql://localhost/";
-    static final String BD = "proyectoFinal";        // especificar: el nombre de la BD,
+    static final String BD = "indexationproject";        // especificar: el nombre de la BD,
     static final String USER = "root";        // el nombre de usuario
     static final String PASSWD = "Chocolatecon1Maria";// el password del usuario
 
@@ -41,9 +41,7 @@ public class Transaction {
             for (int j = 1; j <= i; j++) {
                 //System.out.print(rset.getString(j) + "\t");
                 currentRow[j-1] = rset.getString(j);
-                System.out.print(currentRow[j-1] + "\t");
             }
-            System.out.println();
             resultSet.add(currentRow);
         }
         return resultSet;
@@ -52,10 +50,8 @@ public class Transaction {
     public ArrayList query(String statement) throws SQLException {
 
         ResultSet rset = stmt.executeQuery(statement);
-        System.out.println("Results:");
         ArrayList<String[]> resultSet =  dumpResultSet(rset);
 
-        System.out.println();
         rset.close();
         return resultSet;
     }
