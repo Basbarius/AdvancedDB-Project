@@ -8,6 +8,7 @@ public class Transaction {
     Connection conn = null;
     Statement stmt = null;
     BufferedReader in = null;
+    asdfasdf;
 
     static final String URL = "jdbc:mysql://localhost/";
     static final String BD = "indexationproject";        // especificar: el nombre de la BD,
