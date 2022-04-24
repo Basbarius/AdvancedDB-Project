@@ -4,16 +4,10 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws SQLException, Exception {
         Transaction transactionManager = new Transaction();
+        QueryMaker queryMaker = new QueryMaker(transactionManager);
 
-        try {
-            ArrayList<String[]> resultSet = transactionManager.query("select * " +
-                    "from worker ");
-            for(String[] worker: resultSet){
-                System.out.println(worker[0]);
-            }
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-        }
+        System.out.println(queryMaker.compareDocuments(4, 2, 2));
+        ArrayList<String> query = new ArrayList<>();
+        queryMaker.makeQuery(query, 2, 2);
     }
 }
