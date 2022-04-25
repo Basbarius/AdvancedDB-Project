@@ -4,7 +4,8 @@ where td.name = tq.name and tq.id = q.id and q.label = "q1"
       and not td.id = any(select d.id 
 			from document d, query q 
 			where d.id = q.id)
-group by td.id;
+group by td.id
+order by distance asc;
 
 select sqrt(sum(pow(td1.frequency - td2.frequency, 2))) distance
 from complete td1, complete td2

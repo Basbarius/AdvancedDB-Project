@@ -6,8 +6,10 @@ public class Main {
         Transaction transactionManager = new Transaction();
         QueryMaker queryMaker = new QueryMaker(transactionManager);
 
-        System.out.println(queryMaker.compareDocuments(4, 2, 2));
+        System.out.println(queryMaker.compareDocuments(4, 2, 1));
         ArrayList<String> query = new ArrayList<>();
-        queryMaker.makeQuery(query, 2, 2);
+        query.add("life");
+        query.add("death");
+        queryMaker.makeQuery(query, 2, 0);
     }
 }
