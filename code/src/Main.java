@@ -10,6 +10,9 @@ public class Main {
         ArrayList<String> query = new ArrayList<>();
         query.add("life");
         query.add("death");
-        queryMaker.makeQuery(query, 2, 0);
+        queryMaker.createSVDTable(false);
+        queryMaker.makeQuery(query, 2, 1);
+        //queryMaker.convertQueryToSVDValues("q1");
+
     }
 }
