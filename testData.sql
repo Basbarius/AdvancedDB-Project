@@ -1,11 +1,17 @@
 insert into document values();
 insert into document values();
 insert into document values();
+insert into document values();
 insert into text values(1, "a", "b", "2022-01-01");
+insert into text values(4, "c", "d", "2022-01-01");
 insert into query values(2, "q1");
 insert into query values(3, "q2");
 insert into term values("death");
 insert into term values("life");
+insert into word values("death", "death");
+insert into word values("life", "life");
 insert into has values(1, "death", 2);
 insert into has values(2, "life", 1);
 insert into has values(3, "life", 2);
+insert into has values(4, "death", 3);
+insert into has values(4, "life", 1);

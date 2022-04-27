@@ -35,43 +35,61 @@ public class QueryMaker {
         //return most relevant documents
         ArrayList<Integer> mostRelevantDocuments = new ArrayList<>();
         System.out.println("The " + nDocumentsToRetrieve + " most relevant documents are:");
+        System.out.println("\twithout SVD");
         for(int i=0; i<nDocumentsToRetrieve; i++) {
             String[] row = resultSet.get(i);
-            System.out.println("id: " + row[0] + ", distance: " + row[1] );
+            System.out.println("\tid: d" + row[0] + ", distance: " + row[1] );
             mostRelevantDocuments.add(Integer.parseInt(row[0]));
         }
 
         //make query using SVD
         resultSet = getDistancePerDocumentSVD(queryLabel, proximityMeasure, order, resultSet);
-        System.out.println("The " + nDocumentsToRetrieve + " most relevant documents using SVD are:");
+        System.out.println("\twithSVD");
         for(int i=0; i<nDocumentsToRetrieve; i++) {
             String[] row = resultSet.get(i);
-            System.out.println("id: " + row[0] + ", distance: " + row[1] );
+            System.out.println("\tid: d" + row[0] + ", distance: " + row[1] );
         }
+        System.out.println();
 
         return mostRelevantDocuments;
     }
 
-    public double compareDocuments(int firstDocumentIndex, int secondDocumentIndex,
+    public double[] compareDocuments(int firstDocumentIndex, int secondDocumentIndex,
                                    int comparisonMeasure) throws SQLException, Exception{
         boolean validIndexes = validateIndexes(firstDocumentIndex, secondDocumentIndex);
-        if(!validIndexes) return -1;
+        double[] values = new double[2];
+        if(!validIndexes) return values;
 
         String proximityMeasure = getProximityMeasure(comparisonMeasure, "td1", "td2");
 
         ArrayList<String[]> resultSet = new ArrayList<>();
         try {
+            System.out.println("Comparing documents: d" + firstDocumentIndex + " and d" + secondDocumentIndex);
             resultSet = databaseConnection.query(
                     "select " + proximityMeasure + " distance " +
                     "from complete td1, complete td2 " +
                     "where td1.id = " + firstDocumentIndex +
                             " and td2.id = " + secondDocumentIndex +
                             " and td1.name = td2.name;");
+            System.out.println("\twithout SVD");
+            values[0] = Double.parseDouble(resultSet.get(0)[0]);
+            System.out.println("\t" + values[0]);
+
+            resultSet = databaseConnection.query(
+                    "select " + proximityMeasure + " distance " +
+                            "from hassvd td1, hassvd td2 " +
+                            "where td1.id = " + firstDocumentIndex +
+                            " and td2.id = " + secondDocumentIndex +
+                            " and td1.termid = td2.termid;");
+            System.out.println("\twith SVD");
+            values[1] = Double.parseDouble(resultSet.get(0)[0]);
+            System.out.println("\t" + values[1]);
+            System.out.println();
         }
         catch (Exception ex){
             ex.printStackTrace();
         }
-        return Double.parseDouble(resultSet.get(0)[0]);
+        return values;
     }
 
     public void createSVDTable(boolean storeInDB) throws SQLException, Exception{
