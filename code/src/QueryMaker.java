@@ -233,11 +233,9 @@ public class QueryMaker {
         try {
             resultSet = databaseConnection.query(
                     "select td.id, " + proximityMeasure + " distance " +
-                            "from complete tq, complete td, query q " +
+                            "from complete tq, complete td, query q, text d " +
                             "where td.name = tq.name and tq.id = q.id and q.label = \"" + queryLabel + "\" " +
-                            "and not td.id = any(select d.id " +
-                            "from document d, query q " +
-                            "where d.id = q.id) " +
+                            "and d.id = td.id " +
                             "group by td.id " +
                             "order by distance " + order + ";"
             );
