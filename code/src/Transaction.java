@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.sql.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -12,17 +11,18 @@ public class Transaction {
     static final String URL = "jdbc:mysql://localhost/";
     static final String BD = "indexationproject";        // especificar: el nombre de la BD,
     static final String USER = "root";        // el nombre de usuario
-    static final String PASSWD = "Chocolatecon1Maria";// el password del usuario
+    static final String PASSWD = "proyectofinal";// el password del usuario
 
     public Transaction() throws SQLException, Exception {
 
         // this will load the MySQL driver, each DB has its own driver
-        Class.forName("com.mysql.jdbc.Driver");
+//        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         System.out.print("Connecting to the database... ");
 
         // setup the connection with the DB
         conn = DriverManager.getConnection(URL + BD, USER, PASSWD);
-        System.out.println("connected\n\n");
+        System.out.println("Connected\n");
 
         conn.setAutoCommit(false);         // inicio de la 1a transacción
         stmt = conn.createStatement();
@@ -55,6 +55,19 @@ public class Transaction {
         rset.close();
         return resultSet;
     }
+
+    public void executeUpdate(String statement) throws SQLException {
+        stmt.executeUpdate(statement);
+    }
+
+    public void commitChanges() throws SQLException {
+        conn.commit();
+    }
+
+    public void rollBack() throws SQLException {
+        conn.rollback();
+    }
+
 
     private void close() throws SQLException {
         stmt.close();
