@@ -332,4 +332,26 @@ public class QueryMaker {
         return firstDocumentIndex >= min && secondDocumentIndex >= min &&
             firstDocumentIndex <= max && secondDocumentIndex <= max;
     }
+
+    public void findDocumentMetadata(int documentId) {
+        ArrayList<String[]> resultSet = new ArrayList<>();
+        try {
+            resultSet = databaseConnection.query(
+                    "select * " +
+                            "from text " +
+                            "where id = " + documentId + ";");
+            System.out.println("Document " + documentId +" metadata: ");
+            System.out.print("\turl: ");
+            System.out.println(resultSet.get(0)[1]);
+            System.out.print("\ttitle: ");
+            System.out.println(resultSet.get(0)[2]);
+            System.out.print("\tauthor(s): ");
+            System.out.println(resultSet.get(0)[3]);
+            System.out.print("\tdate: ");
+            System.out.println(resultSet.get(0)[4]);
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 }
