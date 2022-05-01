@@ -11,13 +11,13 @@ public class Transaction {
     static final String URL = "jdbc:mysql://localhost/";
     static final String BD = "indexationproject";        // especificar: el nombre de la BD,
     static final String USER = "root";        // el nombre de usuario
-    static final String PASSWD = "proyectofinal";// el password del usuario
+    static final String PASSWD = "leafvine";// el password del usuario
 
     public Transaction() throws SQLException, Exception {
 
         // this will load the MySQL driver, each DB has its own driver
 //        Class.forName("com.mysql.jdbc.Driver");
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver");
         System.out.print("Connecting to the database... ");
 
         // setup the connection with the DB

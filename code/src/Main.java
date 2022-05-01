@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        String path = "D:\\Usuarios\\Escritorio\\Tareas\\2022 I\\Bases de datos avanzados\\Proyecto final\\AdvancedDB-Project\\code\\documents";
+        String path = "C:\\Users\\jorge\\Documents\\GitHub\\AdvancedDB-Project\\code\\documents";
 
         DeleteWords doc1 = new DeleteWords();
         DeleteWords doc2 = new DeleteWords();
@@ -17,7 +17,13 @@ public class Main {
 
         DataBase dataBase1 = new DataBase();
         dataBase1.createDocument();
-        dataBase1.addDataBaseTermWord(path + "\\D1. stemmed.txt", path + "\\D1. output.txt");
+
+         Snowball snow = new Snowball();
+         String stem1 = snow.stemTxt(path + "\\D1. output.txt");
+
+
+        //dataBase1.addDataBaseTermWord(path + "\\D1. stemmed.txt", path + "\\D1. output.txt");
+        dataBase1.addDataBaseTermWord(stem1, path + "\\D1. output.txt");
         frequencyDoc1.forEach((key, value) -> {
             try {
                 dataBase1.addDataBaseDocument(1, key, value);
