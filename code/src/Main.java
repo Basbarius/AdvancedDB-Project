@@ -12,7 +12,7 @@ public class Main {
         DeleteWords doc1 = new DeleteWords();
         DeleteWords doc2 = new DeleteWords();
 
-        HashMap<String, Integer> frequencyDoc1 = doc1.deleteWords(path + "\\test d1.txt", path + "\\D1. output.txt");
+        HashMap<String, Integer> frequencyDoc1 = doc1.deleteWords(path + "\\D1. STRESS AND HEALTH.txt", path + "\\D1. output.txt");
 //        HashMap<String, Integer> frequencyDoc2 = doc2.deleteWords(path + "\\test d2.txt", path + "\\D2. output.txt");
 
         DataBase dataBase1 = new DataBase();
