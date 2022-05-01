@@ -12,7 +12,7 @@ create table document(
 	primary key (id));
 create table text(
 	id int, 
-	url char(50),
+	url char(300),
 	title char(40), 
 	author char(50), 
 	date date,
@@ -40,13 +40,15 @@ create table has(
 	name char(20),
 	frequency int, 
 	foreign key (id) references document (id),
-	foreign key (name) references term (name)
+	foreign key (name) references term (name),
+	primary key (id, name)
 );
 create table hasSVD(
 	id int,
 	termid int,
 	frequency real,
-	foreign key (id) references document (id)
+	foreign key (id) references document (id),
+	primary key(id, termid)
 );
 
 create view complete as

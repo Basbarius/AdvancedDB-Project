@@ -5,14 +5,19 @@ public class Main {
     public static void main(String[] args) throws SQLException, Exception {
         Transaction transactionManager = new Transaction();
         QueryMaker queryMaker = new QueryMaker(transactionManager);
+        DocumentBaseFeeder documentBaseFeeder = new DocumentBaseFeeder(transactionManager);
+//        documentBaseFeeder.insertSampleDocumentBase();
 
-        queryMaker.compareDocuments(4, 2, 0);
-        ArrayList<String> query = new ArrayList<>();
-        query.add("life");
-        query.add("death");
         queryMaker.createSVDTable(false);
-        queryMaker.makeQuery(query, 2, 0);
-        //queryMaker.convertQueryToSVDValues("q1");
 
+        queryMaker.compareDocuments(5, 7, 0);
+        queryMaker.compareDocuments(5, 7, 1);
+        queryMaker.compareDocuments(5, 7, 2);
+        ArrayList<String> query = new ArrayList<>();
+        query.add("stress");
+        query.add("health");
+        queryMaker.makeQuery(query, 3, 0);
+        queryMaker.makeQuery(query, 3, 1);
+        queryMaker.makeQuery(query, 3, 2);
     }
 }

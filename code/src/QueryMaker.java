@@ -1,5 +1,6 @@
 import org.apache.commons.math3.linear.*;
 
+import javax.sound.midi.SysexMessage;
 import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -97,6 +98,7 @@ public class QueryMaker {
         ArrayList<double[]> frequencyTableAL = new ArrayList<>();
         ArrayList<Integer> documentIds = new ArrayList<>();
         int nDocuments = 0;
+        int linesToKeep = 200;
 
         //get frequency matrix dimensions and all document ids
         try {
@@ -146,13 +148,6 @@ public class QueryMaker {
         RealMatrix us = svd.getU().multiply(svd.getS());
         RealMatrix vt = svd.getVT();
 
-        System.out.print("Effective Rank of the Frequency Table: ");
-        System.out.println(svd.getRank());
-
-        if (svd.getRank() < nDocuments){
-            System.out.println("Frequency table will be shortened");
-        }
-
         //store VT table in database as hasSVD
         if(storeInDB){
             int termId = 0;
@@ -168,7 +163,7 @@ public class QueryMaker {
             databaseConnection.commitChanges();
         }
 
-        DecompositionSolver solver = new LUDecomposition(us).getSolver();
+        DecompositionSolver solver = new SingularValueDecomposition(us).getSolver();
         querySolver = solver;
     }
 

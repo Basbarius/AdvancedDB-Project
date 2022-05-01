@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="java">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../libstemmer_java-2.2.0/java/org/tartarus/snowball" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../libstemmer_java-2.2.0/java" />
+    </SOURCES>
+  </library>
+</component>

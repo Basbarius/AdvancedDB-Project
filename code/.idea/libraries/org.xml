@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="org">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../libstemmer_java-2.2.0/java/org" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../libstemmer_java-2.2.0/java" />
+    </SOURCES>
+  </library>
+</component>
