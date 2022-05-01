@@ -12,7 +12,8 @@ create table document(
 	primary key (id));
 create table text(
 	id int, 
-	url char(50), 
+	url char(50),
+	title char(40), 
 	author char(50), 
 	date date,
 	primary key (url),
