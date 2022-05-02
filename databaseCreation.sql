@@ -12,9 +12,9 @@ create table document(
 	primary key (id));
 create table text(
 	id int, 
-	url char(300),
-	title char(40), 
-	author char(50), 
+	url char(255),
+	title char(255), 
+	author char(255), 
 	date date,
 	primary key (url),
 	foreign key (id) references document (id)
